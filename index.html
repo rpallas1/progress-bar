@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Ryan Pallas -->
+        <meta charset="utf-8">
+        <title>Progress Bar Animation</title>
+        <link href="styles.css" rel="stylesheet">
+        <!-- <script type = "text/javascript" src="javaScript.js"></script> -->
+    </head>
+    <body>
+        <section class="instructions">
+            <p>Welcome to the animation</p>
+            <ul>
+                <li>First enter a RGB color with each value between 0 and 255</li>
+                <li>Next choose how many shades you want of that color (1-3)</li>
+                <li>Finally choose the number of blocks you want</li>
+            </ul>
+        </section>
+        <form class="user-input" id="input">
+            <p>Enter RGB color value:</p>
+            <div id="color-input">
+                <label for="red-value">Red:</label>
+                <input type="number" id="red-value" name="red-value" min="0" max="255"><br>
+                <label for="green-value">Green:</label>
+                <input type="number" id="green-value" name="green-value" min="0" max="255"><br>
+                <label for="blue-value">Blue:</label>
+                <input type="number" id="blue-value" name="blue-value" min="0" max="255">
+            </div>
+            <!-- <label for="color-value">Enter Color Value:</label>
+            <input type="text" id="color-value" name="color-value" required="true" placeholder="rgb(0-255, 0-255, 0-255)"><br> -->
+            <div class="num-colors-input" id="number-of-colors-input">
+                <p>Choose the number of colors:</p>
+                <input type="radio" name="num-colors" id="one-color" value="1" required="true">    
+                <label for="one-color">1</label><br>
+                <input type="radio" name="num-colors" id="two-colors" value="2" required="true">
+                <label for="two-colors">2</label><br>
+                <input type="radio" name="num-colors" id="three-colors" value="3" required="true">
+                <label for="three-colors">3</label><br>
+            </div><br>
+            <div id="block-input">
+                <label for="num-blocks">Enter the number of blocks:</label>
+                <input type="number" name="num-blocks" id="num-blocks" min="1" required="true"><br>
+            </div>
+            <!-- <button id="submit-button">Submit</button> -->
+        </form>
+        <div class="animation">
+            <div id="separate"></div>
+            <div id="main"></div> 
+            <button class ="button" id="start-button">Start Animation</button>
+            <button class="button" id="pause-button">Pause</button> 
+            <button class ="button" id="reset-button">Reset Animation</button>           
+        </div>
+        <script type = "text/javascript" src="javaScript.js"></script>
+    </body>
+</html>
+
