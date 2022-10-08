@@ -62,18 +62,11 @@ function init() {
 
 function addElement() {
     const mainDiv = document.getElementById("main")
-    // getUserInput();
 
-
-    //getting num of blocks from CSS
-    // numOfBlocks = getComputedStyle(mainDiv).getPropertyValue("--number-of-blocks");
-
-    // getUserInput();
     tempUserColorValue = `rgb(${userColorValueR}, ${userColorValueG}, ${userColorValueB})`;
     tempUserColorValueR = userColorValueR;
     tempUserColorValueG = userColorValueG;
     tempUserColorValueB = userColorValueB;
-    console.log(`Temp user color value: ${tempUserColorValue}`);
 
     for (let i = 0; i < numOfBlocks; i++) {
         if (classNum > 9) {
@@ -92,9 +85,7 @@ function addElement() {
 
         //OBJECT ORIENTED----------
         blockDictionary[blockEntryName] = {class: className, id: idName, color: assignColorValue(i)};
-        // console.log(`User color: ${userColorValue}`);
         userColorValue = tempUserColorValue;
-        // console.log(`User color set back to original: ${assignColorValue(0)}`);
 
         animationArray.push(blockDictionary);
 
@@ -142,23 +133,6 @@ function assignColorValue(position) {
         //not valid input
     }
  
-    //get block colors from CSS
-    // const mainDiv = document.getElementById("main");
-    // color_0 = getComputedStyle(mainDiv).getPropertyValue("--color0").trimStart();
-    // color_1 = getComputedStyle(mainDiv).getPropertyValue("--color1").trimStart();
-    // color_2 = getComputedStyle(mainDiv).getPropertyValue("--color2").trimStart();
-    // color_3 = getComputedStyle(mainDiv).getPropertyValue("--color3").trimStart();
-
-    // if (position == 0) {
-    //     colorValue = color_1;
-    // } else if ((position == 1) || (position == numOfBlocks - 1)) {
-    //     colorValue = color_2;
-    // } else if ((position == 2) || (position == numOfBlocks - 2)) {
-    //     colorValue = color_3;
-    // } else {
-    //     colorValue = color_0;
-    // }
-
     return colorValue;
 }
 
@@ -230,10 +204,11 @@ function startInterval() {
         inputEntered = false;
         addElement();
         setBlockColor();
+        getUserInput();
 
         const mainDiv = document.getElementById("main");
-
-        animationTime = getComputedStyle(mainDiv).getPropertyValue("--anim-time") / getComputedStyle(mainDiv).getPropertyValue("--number-of-blocks") * 1000;
+        console.log(`Num of blocks ${numOfBlocks}`);
+        animationTime = (getComputedStyle(mainDiv).getPropertyValue("--anim-time") / numOfBlocks) * 1000;
 
         console.log("intervalId value before start: " + intervalId)
         startPressed = true;

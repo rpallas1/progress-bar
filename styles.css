@@ -2,11 +2,7 @@
     --total-width: 75%;
     --total-height: 50px;
     --margin-around: 2px;
-    --color1: #5400c9;
-    --color2: #6c2fc2;
-    --color3: #8760bd;
-    --color0: #ffffff;
-    
+
     /* animations */
     --anim-time: 1;
     --iterations: 50;
@@ -74,8 +70,8 @@ form {
 }
 
 #number-of-colors-input {
-  border-radius: 8px;
-  border-width: 1px;
+  border-radius: 5px;
+  border-width: 3px;
   border-style: solid;
   border-color: white;
   padding: 2px;
@@ -108,12 +104,6 @@ input[type=text], input[type=number], input[type=submit] {
 input[type=text]:focus, input[type=number]:focus {
   background-color: #ddd;
 }
-
-/* #submit-button {
-  width: 20%;
-  margin: 8px 0;
-  position: relative;
-} */
 
 
 /* --- ANIMATION --- */
