@@ -289,7 +289,7 @@ function adjustColorValues(valueChange) {
     } else if (userColorValueR > 255) {
         userColorValueR = 255;
     }
-
+    
     userColorValueG -= valueChange;
     if (userColorValueG < 0) {
         userColorValueG = 0;
