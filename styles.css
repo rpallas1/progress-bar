@@ -23,7 +23,6 @@ body {
   flex-wrap: wrap;
   align-content: center;
   flex-direction: column;
-  /* margin-bottom: 10px; */
 }
 
 .instructions p {

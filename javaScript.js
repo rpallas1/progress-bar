@@ -1,9 +1,4 @@
-
 window.onload = init;
-//Event Listeners
-document.getElementById("start-button").addEventListener("click", startInterval);
-document.getElementById("reset-button").addEventListener("click", resetInterval);
-document.getElementById("pause-button").addEventListener("click", pauseInterval);
 
 // let numOfBlocks = 17;
 let className = "block-";
@@ -47,17 +42,10 @@ let color_2 = "";
 let color_3 = "";
 
 function init() {
-    // addElement();
-    // setBlockColor();
-    //gets animation time from CSS
-    // const mainDiv = document.getElementById("main");
-    //need to check is the value is infinite
-
-    // animationTime = getComputedStyle(mainDiv).getPropertyValue("--anim-time") / getComputedStyle(mainDiv).getPropertyValue("--number-of-blocks") * 1000;
-    // startInterval();
-
-    // console.log(animationTime);
-    // console.log("Full animation array: " + animationArray);
+    //Event Listeners
+    document.getElementById("start-button").addEventListener("click", startInterval);
+    document.getElementById("reset-button").addEventListener("click", resetInterval);
+    document.getElementById("pause-button").addEventListener("click", pauseInterval);
 }
 
 function addElement() {
@@ -388,57 +376,3 @@ function getUserInput() {
         inputEntered = true;
     }
 }
-
-
-function getUserNumOfBlocks() {
-    numOfBlocks = prompt("Enter the number of blocks (at least 5): ");
-
-    while (isUserNumBlocksValid == false) {
-        if (numOfBlocks >= 5 && (numOfColors == 1 || numOfColors == 2)) {
-            isUserNumBlocksValid = true;
-        } else if (numOfBlocks >= 8 && numOfColors == 3){
-            isUserNumBlocksValid = true;
-        } else {
-            numOfBlocks = prompt("Enter the number of blocks (at least 5): ");
-            isUserNumBlocksValid = false;
-        }
-    }
-}
-
-function getUserNumOfColors() {
-    while (isUserColorValid == false) {
-        numOfColors = prompt("Enter the number of colors (1-3): ");
-        if (numOfColors <= 3 && numOfColors >= 1) {
-            isUserColorValid = true;
-        } else {
-            isUserColorValid = false;
-        }
-    }
-}
-
-function getUserColorValue() {
-    //have them enter the RGB values separately and make sure they are between 0 and 255
-    while (userColorValue == false) {
-        userColorValueR = parseInt(prompt("Enter a red color value: "));
-        if (userColorValueR >= 0 && userColorValueR <= 255) {
-            userColorValue = true;
-        }
-    }
-
-    userColorValue = false;
-    while (userColorValue == false) {
-        userColorValueG = parseInt(prompt("Enter a green color value: "));
-        if (userColorValueG >= 0 && userColorValueG <= 255) {
-            userColorValue = true;
-        }
-    }
-
-    userColorValue = false;
-    while (userColorValue == false) {
-        userColorValueB = parseInt(prompt("Enter a green color value: "));
-        if (userColorValueB >= 0 && userColorValueB <= 255) {
-            userColorValue = true;
-        }
-    }
-}
-
