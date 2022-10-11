@@ -10,9 +10,7 @@ let tempColorValue = "";
 let blockArray = [];
 let intervalId;
 let intervalCount = 0;
-let animationTime = 0;
 let timePassed = 0;
-let iterationCount = 0;
 let animationDirection = "";
 let blockDictionary = new Object();
 let blockEntryName = "block";
@@ -26,11 +24,15 @@ let userColorValueR = 0;
 let userColorValueG = 0;
 let userColorValueB = 0;
 let userColorValue = "";
+let animationTime = 0;
+let iterationCount = 0;
+let totalIterations = 0;
 let tempUserColorValue = "";
 let tempUserColorValueR = 0;
 let tempUserColorValueG = 0;
 let tempUserColorValueB = 0;
 let inputEntered = false;
+let startTwice = false;
 
 let isUserColorValid = false;
 let isUserNumBlocksValid = false;
@@ -71,7 +73,7 @@ function addElement() {
         newDiv.setAttribute("id", idName);
         mainDiv.append(newDiv);
 
-        //OBJECT ORIENTED----------
+        //---- OBJECT ORIENTED ----
         blockDictionary[blockEntryName] = {class: className, id: idName, color: assignColorValue(i)};
         userColorValue = tempUserColorValue;
 
@@ -127,15 +129,13 @@ function assignColorValue(position) {
 function blockAnimation() {
     intervalCount++;
 
-    //get iterations from CSS
-    const mainDiv = document.getElementById("main");
-    iterationCount = getComputedStyle(mainDiv).getPropertyValue("--iterations");
-
     //checks to see if the iteration count is infinite
     if (iterationCount !== "infinite") {
         iterationCount *= numOfBlocks;
 
         if (intervalCount > iterationCount) {
+            //---- BUG ----
+            //Still need to stop animation ofter the resetColors() runs 
             resetColors();
             console.log("Still running, press reset or pause to stop\nintervalId: " + intervalId);
         } 
@@ -143,6 +143,7 @@ function blockAnimation() {
     
     shiftColors();
     setBlockColor();
+    iterationCount /= numOfBlocks;
 }
 
 function resetColors() {
@@ -153,7 +154,7 @@ function resetColors() {
 }
 
 function setBlockColor() {
-    //OBJECT ORIENTED----------
+    //---- OBJECT ORIENTED ----
     for (let block in animationArray) {
         document.getElementById(animationArray[block]["block" + block].id).style.backgroundColor = animationArray[block]["block" + block].color;
     }
@@ -164,7 +165,7 @@ function shiftColors() {
     const mainDiv = document.getElementById("main");
     animationDirection = getComputedStyle(mainDiv).getPropertyValue("--anim-direction").trim();
 
-    //OBJECT ORIENTED---------
+    //---- OBJECT ORIENTED ----
     //gets the color value from each block and stores it an array
     for (let block in animationArray) {
         animationArrayTempColorShift.push(animationArray[block]["block" + block].color);
@@ -194,9 +195,8 @@ function startInterval() {
         setBlockColor();
         getUserInput();
 
-        const mainDiv = document.getElementById("main");
-        console.log(`Num of blocks ${numOfBlocks}`);
-        animationTime = (getComputedStyle(mainDiv).getPropertyValue("--anim-time") / numOfBlocks) * 1000;
+        //calculate the animation time
+        animationTime = (animationTime / numOfBlocks) * 1000;
 
         console.log("intervalId value before start: " + intervalId)
         startPressed = true;
@@ -205,6 +205,7 @@ function startInterval() {
         console.log("Start button pressed: " + startPressed);  
     } else if (startPressed == true) {
         console.log("Start button was pressed twice and animation was reset");
+        startTwice = true;
         resetInterval();
         startInterval();
     } else if (inputEntered == false) {
@@ -218,6 +219,7 @@ function startInterval() {
 function resetInterval() {
     clearInterval(intervalId);
     console.log("Animation Complete");
+    console.log(`Start Twice: ${startTwice}`);
 
     //removes all of the div's created from the first addElement
     if (animationArray.length > 0) {
@@ -231,9 +233,8 @@ function resetInterval() {
     animationArray = [];
     animationArrayTempColorShift = [];
     tempColorValue = "";
-    intervalCount = 0;
     animationTime = 0;
-    iterationCount = 0;
+    intervalCount = 0;
     idName = 0;
     classNum = 0;
     intervalId = null;
@@ -247,7 +248,11 @@ function resetInterval() {
     numOfBlocks = 0;
     numOfColors = 0;
     tempUserColorValue = "";
+    animationTime = 0;
+    iterationCount = 0;
     inputEntered = false;
+
+    //set input borders back to normal
     document.getElementById("red-value").style.borderColor = "";
     document.getElementById("red-value").style.borderWidth = "";
     document.getElementById("green-value").style.borderColor = "";
@@ -256,9 +261,25 @@ function resetInterval() {
     document.getElementById("blue-value").style.borderWidth = "";
     document.getElementById("num-blocks").style.borderColor = "";
     document.getElementById("num-blocks").style.borderWidth = "";
+    document.getElementById("animation-time").style.borderColor = "";
+    document.getElementById("animation-time").style.borderWidth = "";
+    document.getElementById("iteration-count").style.borderColor = "";
+    document.getElementById("iteration-count").style.borderWidth = "";
     document.getElementById("number-of-colors-input").style.borderColor = "";
     document.getElementById("pause-button").innerHTML = "Pause";
 
+    if (startTwice == false) {
+    //clears the previous user input (radio button not included??)
+    userColorValueR = document.getElementById("red-value").value = "";
+    userColorValueG = document.getElementById("green-value").value = "";
+    userColorValueB = document.getElementById("blue-value").value = "";
+    numOfBlocks = document.getElementById("num-blocks").value = "";
+    animationTime = document.getElementById("animation-time").value = "";
+    iterationCount = document.getElementById("iteration-count").value = "";
+    } else {
+        startTwice = false;
+    }
+ 
     console.log("Animation reset\nintervalId: " + intervalId);
 }
 
@@ -314,12 +335,15 @@ function adjustColorValues(valueChange) {
     return userColorValue;
 }
 
-// ----USER INPUT----
+// ---- USER INPUT ----
 function getUserInput() {
+    //set default values by setting them if the if-elses return false and keep borders red so they know they didn't add any info.
     userColorValueR = document.getElementById("red-value").value;
     userColorValueG = document.getElementById("green-value").value;
     userColorValueB = document.getElementById("blue-value").value;
     numOfBlocks = document.getElementById("num-blocks").value;
+    animationTime = document.getElementById("animation-time").value;
+    iterationCount = document.getElementById("iteration-count").value;
     
     try {
         numOfColors = document.querySelector('input[name="num-colors"]:checked').value;
@@ -331,7 +355,10 @@ function getUserInput() {
     if (userColorValueR == "") {
         document.getElementById("red-value").style.borderColor = "red";
         document.getElementById("red-value").style.borderWidth = "3px";
-        inputEntered = false;
+
+        //default input
+        userColorValueR = 123;
+        // inputEntered = false;
     } else {
         document.getElementById("red-value").style.borderColor = "";
         document.getElementById("red-value").style.borderWidth = ""; 
@@ -341,7 +368,10 @@ function getUserInput() {
     if (userColorValueG == "") {
         document.getElementById("green-value").style.borderColor = "red";
         document.getElementById("green-value").style.borderWidth = "3px";
-        inputEntered = false;
+
+        //default input
+        userColorValueG = 123;
+        // inputEntered = false;
     } else {
         document.getElementById("green-value").style.borderColor = "";
         document.getElementById("green-value").style.borderWidth = "";
@@ -351,7 +381,10 @@ function getUserInput() {
     if (userColorValueB == "") {
         document.getElementById("blue-value").style.borderColor = "red";
         document.getElementById("blue-value").style.borderWidth = "3px";
-        inputEntered = false;
+
+        //default input
+        userColorValueB = 123;
+        // inputEntered = false;
     } else {
         document.getElementById("blue-value").style.borderColor = "";
         document.getElementById("blue-value").style.borderWidth = "";
@@ -361,15 +394,47 @@ function getUserInput() {
     if (numOfBlocks == "") {
         document.getElementById("num-blocks").style.borderColor = "red";
         document.getElementById("num-blocks").style.borderWidth = "3px";
-        inputEntered = false;   
+
+        //default input
+        numOfBlocks = 10;
+        // inputEntered = false;   
     } else {
         document.getElementById("num-blocks").style.borderColor = "";
         document.getElementById("num-blocks").style.borderWidth = "";
         inputEntered = true
     }
     
+    if (animationTime == "") {
+        document.getElementById("animation-time").style.borderColor = "red";
+        document.getElementById("animation-time").style.borderWidth = "3px";
+
+        //default input
+        animationTime = 1;
+        // inputEntered = false;
+    } else {
+        document.getElementById("animation-time").style.borderColor = "";
+        document.getElementById("animation-time").style.borderWidth = "";
+        inputEntered = true
+    }
+
+    if (iterationCount == "") {
+        document.getElementById("iteration-count").style.borderColor = "red";
+        document.getElementById("iteration-count").style.borderWidth = "3px";
+
+        //default input
+        iterationCount = 10;
+        // inputEntered = false;
+    } else {
+        document.getElementById("iteration-count").style.borderColor = "";
+        document.getElementById("iteration-count").style.borderWidth = "";
+        inputEntered = true
+    }
+
     if (numOfColors == -1) {
         document.getElementById("number-of-colors-input").style.borderColor = "red";
+
+        //default input
+
         inputEntered = false;
     } else {
         document.getElementById("number-of-colors-input").style.borderColor = "";

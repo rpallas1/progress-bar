@@ -3,12 +3,8 @@
     --total-height: 50px;
     --margin-around: 2px;
 
-    /* animations */
-    --anim-time: 1;
-    --iterations: 50;
     --anim-transition: linear;
     --anim-direction: none;
-    --number-of-blocks: 10;
   }
   
 body {
@@ -85,7 +81,8 @@ form {
   margin: 8px 0;
 }
 
-#block-input {
+/* the last three integer inputs */
+.int-input {
   display: flex;
   width: 80%;
   flex-direction: column;

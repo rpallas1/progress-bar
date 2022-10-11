@@ -20,11 +20,11 @@
             <p>Enter RGB color value:</p>
             <div id="color-input">
                 <label for="red-value">Red:</label>
-                <input type="number" id="red-value" name="red-value" min="0" max="255"><br>
+                <input type="number" id="red-value" name="red-value" min="0" max="255" placeholder="0-255"><br>
                 <label for="green-value">Green:</label>
-                <input type="number" id="green-value" name="green-value" min="0" max="255"><br>
+                <input type="number" id="green-value" name="green-value" min="0" max="255" placeholder="0-255"><br>
                 <label for="blue-value">Blue:</label>
-                <input type="number" id="blue-value" name="blue-value" min="0" max="255">
+                <input type="number" id="blue-value" name="blue-value" min="0" max="255" placeholder="0-255">
             </div>
             <div class="num-colors-input" id="number-of-colors-input">
                 <p>Choose the number of colors:</p>
@@ -35,10 +35,20 @@
                 <input type="radio" name="num-colors" id="three-colors" value="3" required>
                 <label for="three-colors">3</label><br>
             </div><br>
-            <div id="block-input">
+            <div class="int-input" id="block-input">
                 <label for="num-blocks">Enter the number of blocks:</label>
-                <input type="number" name="num-blocks" id="num-blocks" min="1" required><br>
+                <input type="number" name="num-blocks" id="num-blocks" min="1" placeholder="Recommend 10-50" required><br>
             </div>
+            <div class="int-input" id="animation-time-input">
+               <label for="animation-time">Enter the time animation time:</label> 
+               <input type="number" name="animation-time" id="animation-time" min="0" placeholder="Time it takes for the blocks to reach the end" required><br>
+            </div>
+            <div class="int-input" id="iteration-input">
+                <label for="iteration-count">Enter the number of iterations:</label>
+                <input type="number" name="iteration-count" id="iteration-count" min="1" placeholder="Number of times animation will run" required><br>
+            </div>
+            <!-- add one more for animation time, how long it takes the blocks to get from one side to another -->
+            <!-- also add an iteration input so they can enter how many times they want the animation to play and also make it an option to enter infinite -->
         </form>
         <div class="animation">
             <div id="separate"></div>
