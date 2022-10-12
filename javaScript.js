@@ -41,6 +41,8 @@ let color_0 = "";
 let color_1 = "";
 let color_2 = "";
 let color_3 = "";
+let color_4 = "";
+let color_5 = "";
 
 function init() {
     //Event Listeners
@@ -88,11 +90,14 @@ function addElement() {
 }
 
 function assignColorValue(position) {
+    //make for loop to go through and create all of the colors
     const mainDiv = document.getElementById("main");
     color_0 = "white"
     color_1 = tempUserColorValue;
     color_2 = adjustColorValues(-10);
-    color_3 = adjustColorValues(-40);
+    color_3 = adjustColorValues(-30);
+    color_4 = adjustColorValues(-50);
+    color_5 = adjustColorValues(-70);
 
     if (numOfColors == 1) {
         if (position == 0) {
@@ -115,6 +120,32 @@ function assignColorValue(position) {
             colorValue = color_2;
         } else if ((position == 2) || (position == numOfBlocks - 2)) {
             colorValue = color_3;
+        } else {
+            colorValue = color_0;
+        }
+    } else if (numOfColors == 4) {
+        if (position == 0) {
+            colorValue = color_1;
+        } else if ((position == 1) || (position == numOfBlocks - 1)) {
+            colorValue = color_2;
+        } else if ((position == 2) || (position == numOfBlocks - 2)) {
+            colorValue = color_3;
+        } else if ((position == 3) || (position == numOfBlocks - 3)) {
+            colorValue = color_4;
+        } else {
+            colorValue = color_0;
+        }
+    }  else if (numOfColors == 5) {
+        if (position == 0) {
+            colorValue = color_1;
+        } else if ((position == 1) || (position == numOfBlocks - 1)) {
+            colorValue = color_2;
+        } else if ((position == 2) || (position == numOfBlocks - 2)) {
+            colorValue = color_3;
+        } else if ((position == 3) || (position == numOfBlocks - 3)) {
+            colorValue = color_4;
+        } else if ((position == 4) || (position == numOfBlocks - 4)) {
+            colorValue = color_5;
         } else {
             colorValue = color_0;
         }
