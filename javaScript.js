@@ -346,7 +346,7 @@ function getUserInput() {
 
     if (userColorValueR == "") {
         document.getElementById("red-value").style.borderColor = "red";
-        document.getElementById("red-value").style.borderWidth = "3px";
+        document.getElementById("red-value").style.borderWidth = "2px";
 
         //default input
         userColorValueR = 123;
@@ -358,7 +358,7 @@ function getUserInput() {
 
     if (userColorValueG == "") {
         document.getElementById("green-value").style.borderColor = "red";
-        document.getElementById("green-value").style.borderWidth = "3px";
+        document.getElementById("green-value").style.borderWidth = "2px";
 
         //default input
         userColorValueG = 123;
@@ -370,7 +370,7 @@ function getUserInput() {
 
     if (userColorValueB == "") {
         document.getElementById("blue-value").style.borderColor = "red";
-        document.getElementById("blue-value").style.borderWidth = "3px";
+        document.getElementById("blue-value").style.borderWidth = "2px";
 
         //default input
         userColorValueB = 123;
@@ -382,7 +382,7 @@ function getUserInput() {
 
     if (numOfBlocks == "") {
         document.getElementById("num-blocks").style.borderColor = "red";
-        document.getElementById("num-blocks").style.borderWidth = "3px";
+        document.getElementById("num-blocks").style.borderWidth = "2px";
 
         //default input
         numOfBlocks = 10;
@@ -394,7 +394,7 @@ function getUserInput() {
     
     if (animationTime == "") {
         document.getElementById("animation-time").style.borderColor = "red";
-        document.getElementById("animation-time").style.borderWidth = "3px";
+        document.getElementById("animation-time").style.borderWidth = "2px";
 
         //default input
         animationTime = 1;
@@ -406,7 +406,7 @@ function getUserInput() {
 
     if (iterationCount == "") {
         document.getElementById("iteration-count").style.borderColor = "red";
-        document.getElementById("iteration-count").style.borderWidth = "3px";
+        document.getElementById("iteration-count").style.borderWidth = "2px";
 
         //default input
         iterationCount = 10;
