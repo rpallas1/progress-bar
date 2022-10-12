@@ -1,12 +1,18 @@
 :root {
-    --total-width: 75%;
-    --total-height: 50px;
-    --margin-around: 2px;
+  --total-width: 75%;
+  --total-height: 50px;
+  --margin-around: 2px;
 
-    --anim-transition: linear;
-    --anim-direction: none;
-  }
-  
+  --anim-transition: linear;
+  --anim-direction: none;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0 auto;
   display: flex;
@@ -16,13 +22,13 @@ body {
 
 
 /* --- INSTRUCTIONS --- */
-.instructions {
+.instructions h1 {
   flex-wrap: wrap;
   align-content: center;
   flex-direction: column;
 }
 
-.instructions h1 {
+h1 {
   background-color: #f4ab61;
   width: 100%;
   text-align: center;
@@ -89,7 +95,7 @@ form {
   align-items: center;
 }
 
-input[type=text], input[type=number], input[type=submit] {
+input[type=number] {
   width: 50%;
   padding: 8px;
   box-sizing: border-box;
@@ -98,10 +104,19 @@ input[type=text], input[type=number], input[type=submit] {
   margin: 8px 0;
 }
 
-input[type=text]:focus, input[type=number]:focus {
+input[type=number]:focus {
   background-color: #ddd;
 }
 
+@media screen and (max-width: 450px) {
+  #color-input {
+    flex-direction: column;
+  }
+
+  input[type=number] {
+    width: 75vw;
+  }
+}
 
 /* --- ANIMATION --- */
 .animation {
@@ -135,7 +150,6 @@ input[type=text]:focus, input[type=number]:focus {
 
 /* BUTTONS */
 .button {
-  /* display: flex; */
   display: block;
   margin: 10px auto;
   background-color: #ddd;
@@ -147,7 +161,8 @@ input[type=text]:focus, input[type=number]:focus {
 
 #reset-button {
   color: #222;
-  width: 150px;
+  width: 40vw;
+  /* width: 150px; */
   background-color: white;
   border: 1px solid #f44336;
   padding: 8px;
@@ -156,7 +171,8 @@ input[type=text]:focus, input[type=number]:focus {
 
 #start-button {
   color: #222;
-  width: 150px;
+  width: 40vw;
+  /* width: 150px; */
   background-color: white;
   border: 1px solid #4CAF50 ;
   padding: 8px;
@@ -165,7 +181,8 @@ input[type=text]:focus, input[type=number]:focus {
 
 #pause-button {
   color: #222;
-  width: 125px;
+  width: 25vw;
+  /* width: 125px; */
   background-color: white;
   border: 1px solid #ccc;
   transition-duration: 0.2s;
@@ -183,388 +200,4 @@ input[type=text]:focus, input[type=number]:focus {
 
 #pause-button:hover {
   background-color: #ccc;
-}
-
-
-  /* .block-0 {
-    animation: var(--progress-bar-0) var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-1 {
-    animation: progress-bar-1 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-2 {
-    animation: progress-bar-2 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-3 {
-    animation: progress-bar-3 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-4 {
-    animation: progress-bar-4 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-5 {
-    animation: progress-bar-5 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-6 {
-    animation: progress-bar-6 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-7 {
-    animation: progress-bar-7 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-8 {
-    animation: progress-bar-8 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-  .block-9 {
-    animation: progress-bar-9 var(--anim-time) var(--anim-transition) var(--iterations) var(--anim-direction);
-  }
-
-  @keyframes progress-bar-0 {
-    0% {
-      background-color: var(--color1);
-    }
-    10% {
-      background-color: var(--color2);
-    }
-    20% {
-      background-color: var(--color3);
-    }
-    30% {
-      background-color: var(--color0);
-    }
-    40% {
-      background-color: var(--color0);
-    }
-    50% {
-      background-color: var(--color0);
-    }
-    60% {
-      background-color: var(--color0);
-    }
-    70% {
-      background-color: var(--color0);
-    }
-    80% {
-      background-color: var(--color3);
-    }
-    90% {
-      background-color: var(--color2);
-    }
-    100% {
-      background-color: var(--color1);
-    }
-  }
-  @keyframes progress-bar-1 {
-    0% {
-      background-color: var(--color2);
-    }
-    10% {
-      background-color: var(--color1);
-    }
-    20% {
-      background-color: var(--color2);
-    }
-    30% {
-      background-color: var(--color3);
-    }
-    40% {
-      background-color: var(--color0);
-    }
-    50% {
-      background-color: var(--color0);
-    }
-    60% {
-      background-color: var(--color0);
-    }
-    70% {
-      background-color: var(--color0);
-    }
-    80% {
-      background-color: var(--color0);
-    }
-    90% {
-      background-color: var(--color3);
-    }
-    100% {
-      background-color: var(--color2);
-    }
-  }
-  @keyframes progress-bar-2 {
-    0% {
-      background-color: var(--color3);
-    }
-    10% {
-      background-color: var(--color2);
-    }
-    20% {
-      background-color: var(--color1);
-    }
-    30% {
-      background-color: var(--color2);
-    }
-    40% {
-      background-color: var(--color3);
-    }
-    50% {
-      background-color: var(--color0);
-    }
-    60% {
-      background-color: var(--color0);
-    }
-    70% {
-      background-color: var(--color0);
-    }
-    80% {
-      background-color: var(--color0);
-    }
-    90% {
-      background-color: var(--color0);
-    }
-    100% {
-      background-color: var(--color3);
-    }
-  }
-  @keyframes progress-bar-3 {
-    0% {
-      background-color: var(--color0);
-    }
-    10% {
-      background-color: var(--color3);
-    }
-    20% {
-      background-color: var(--color2);
-    }
-    30% {
-      background-color: var(--color1);
-    }
-    40% {
-      background-color: var(--color2);
-    }
-    50% {
-      background-color: var(--color3);
-    }
-    60% {
-      background-color: var(--color0);
-    }
-    70% {
-      background-color: var(--color0);
-    }
-    80% {
-      background-color: var(--color0);
-    }
-    90% {
-      background-color: var(--color0);
-    }
-    100% {
-      background-color: var(--color0);
-    }
-  }
-  @keyframes progress-bar-4 {
-    0% {
-      background-color: var(--color0);
-    }
-    10% {
-      background-color: var(--color0);
-    }
-    20% {
-      background-color: var(--color3);
-    }
-    30% {
-      background-color: var(--color2);
-    }
-    40% {
-      background-color: var(--color1);
-    }
-    50% {
-      background-color: var(--color2);
-    }
-    60% {
-      background-color: var(--color3);
-    }
-    70% {
-      background-color: var(--color0);
-    }
-    80% {
-      background-color: var(--color0);
-    }
-    90% {
-      background-color: var(--color0);
-    }
-    100% {
-      background-color: var(--color0);
-    }
-  }
-  @keyframes progress-bar-5 {
-    0% {
-      background-color: var(--color0);
-    }
-    10% {
-      background-color: var(--color0);
-    }
-    20% {
-      background-color: var(--color0);
-    }
-    30% {
-      background-color: var(--color3);
-    }
-    40% {
-      background-color: var(--color2);
-    }
-    50% {
-      background-color: var(--color1);
-    }
-    60% {
-      background-color: var(--color2);
-    }
-    70% {
-      background-color: var(--color3);
-    }
-    80% {
-      background-color: var(--color0);
-    }
-    90% {
-      background-color: var(--color0);
-    }
-    100% {
-      background-color: var(--color0);
-    }
-  }
-  @keyframes progress-bar-6 {
-    0% {
-      background-color: var(--color0);
-    }
-    10% {
-      background-color: var(--color0);
-    }
-    20% {
-      background-color: var(--color0);
-    }
-    30% {
-      background-color: var(--color0);
-    }
-    40% {
-      background-color: var(--color3);
-    }
-    50% {
-      background-color: var(--color2);
-    }
-    60% {
-      background-color: var(--color1);
-    }
-    70% {
-      background-color: var(--color2);
-    }
-    80% {
-      background-color: var(--color3);
-    }
-    90% {
-      background-color: var(--color0);
-    }
-    100% {
-      background-color: var(--color0);
-    }
-  }
-  @keyframes progress-bar-7 {
-    0% {
-      background-color: var(--color0);
-    }
-    10% {
-      background-color: var(--color0);
-    }
-    20% {
-      background-color: var(--color0);
-    }
-    30% {
-      background-color: var(--color0);
-    }
-    40% {
-      background-color: var(--color0);
-    }
-    50% {
-      background-color: var(--color3);
-    }
-    60% {
-      background-color: var(--color2);
-    }
-    70% {
-      background-color: var(--color1);
-    }
-    80% {
-      background-color: var(--color2);
-    }
-    90% {
-      background-color: var(--color3);
-    }
-    100% {
-      background-color: var(--color0);
-    }
-  }
-  @keyframes progress-bar-8 {
-    0% {
-      background-color: var(--color3);
-    }
-    10% {
-      background-color: var(--color0);
-    }
-    20% {
-      background-color: var(--color0);
-    }
-    30% {
-      background-color: var(--color0);
-    }
-    40% {
-      background-color: var(--color0);
-    }
-    50% {
-      background-color: var(--color0);
-    }
-    60% {
-      background-color: var(--color3);
-    }
-    70% {
-      background-color: var(--color2);
-    }
-    80% {
-      background-color: var(--color1);
-    }
-    90% {
-      background-color: var(--color2);
-    }
-    100% {
-      background-color: var(--color3);
-    }
-  }
-  @keyframes progress-bar-9 {
-    0% {
-      background-color: var(--color2);
-    }
-    10% {
-      background-color: var(--color3);
-    }
-    20% {
-      background-color: var(--color0);
-    }
-    30% {
-      background-color: var(--color0);
-    }
-    40% {
-      background-color: var(--color0);
-    }
-    50% {
-      background-color: var(--color0);
-    }
-    60% {
-      background-color: var(--color0);
-    }
-    70% {
-      background-color: var(--color3);
-    }
-    80% {
-      background-color: var(--color2);
-    }
-    90% {
-      background-color: var(--color1);
-    }
-    100% {
-      background-color: var(--color2);
-    }
-  } */
-  
+}  
