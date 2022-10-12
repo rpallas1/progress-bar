@@ -31,7 +31,6 @@ let tempUserColorValue = "";
 let tempUserColorValueR = 0;
 let tempUserColorValueG = 0;
 let tempUserColorValueB = 0;
-let inputEntered = false;
 let startTwice = false;
 
 let isUserColorValid = false;
@@ -189,11 +188,10 @@ function shiftColors() {
 }
 
 function startInterval() {
-    if ((!intervalId) && (startPressed == false) && (inputEntered == true)) {
-        inputEntered = false;
+    if ((!intervalId) && (startPressed == false)) {
+        getUserInput();
         addElement();
         setBlockColor();
-        getUserInput();
 
         //calculate the animation time
         animationTime = (animationTime / numOfBlocks) * 1000;
@@ -208,12 +206,7 @@ function startInterval() {
         startTwice = true;
         resetInterval();
         startInterval();
-    } else if (inputEntered == false) {
-        getUserInput();
-        if (inputEntered == true) {
-            startInterval();
-        }
-    }       
+    }   
 }
 
 function resetInterval() {
@@ -250,7 +243,6 @@ function resetInterval() {
     tempUserColorValue = "";
     animationTime = 0;
     iterationCount = 0;
-    inputEntered = false;
 
     //set input borders back to normal
     document.getElementById("red-value").style.borderColor = "";
@@ -337,7 +329,7 @@ function adjustColorValues(valueChange) {
 
 // ---- USER INPUT ----
 function getUserInput() {
-    //set default values by setting them if the if-elses return false and keep borders red so they know they didn't add any info.
+    //change the num of colors to a normal input up to 10 
     userColorValueR = document.getElementById("red-value").value;
     userColorValueG = document.getElementById("green-value").value;
     userColorValueB = document.getElementById("blue-value").value;
@@ -358,7 +350,6 @@ function getUserInput() {
 
         //default input
         userColorValueR = 123;
-        // inputEntered = false;
     } else {
         document.getElementById("red-value").style.borderColor = "";
         document.getElementById("red-value").style.borderWidth = ""; 
@@ -371,7 +362,6 @@ function getUserInput() {
 
         //default input
         userColorValueG = 123;
-        // inputEntered = false;
     } else {
         document.getElementById("green-value").style.borderColor = "";
         document.getElementById("green-value").style.borderWidth = "";
@@ -384,7 +374,6 @@ function getUserInput() {
 
         //default input
         userColorValueB = 123;
-        // inputEntered = false;
     } else {
         document.getElementById("blue-value").style.borderColor = "";
         document.getElementById("blue-value").style.borderWidth = "";
@@ -397,7 +386,6 @@ function getUserInput() {
 
         //default input
         numOfBlocks = 10;
-        // inputEntered = false;   
     } else {
         document.getElementById("num-blocks").style.borderColor = "";
         document.getElementById("num-blocks").style.borderWidth = "";
@@ -410,7 +398,6 @@ function getUserInput() {
 
         //default input
         animationTime = 1;
-        // inputEntered = false;
     } else {
         document.getElementById("animation-time").style.borderColor = "";
         document.getElementById("animation-time").style.borderWidth = "";
@@ -423,7 +410,6 @@ function getUserInput() {
 
         //default input
         iterationCount = 10;
-        // inputEntered = false;
     } else {
         document.getElementById("iteration-count").style.borderColor = "";
         document.getElementById("iteration-count").style.borderWidth = "";
@@ -434,8 +420,8 @@ function getUserInput() {
         document.getElementById("number-of-colors-input").style.borderColor = "red";
 
         //default input
-
-        inputEntered = false;
+        numOfColors = document.getElementById("number-of-colors-input").value = 3;
+        inputEntered = true;
     } else {
         document.getElementById("number-of-colors-input").style.borderColor = "";
         inputEntered = true;
