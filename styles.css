@@ -85,6 +85,11 @@ form p {
   width: 80%;
 }
 
+#color-input label {
+    margin-right: 4px;
+    margin-left: 12px;
+}
+
 #color-input-title {
   margin: 0 5px;
   font-size: 14px;
