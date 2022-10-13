@@ -32,6 +32,7 @@ let tempUserColorValueR = 0;
 let tempUserColorValueG = 0;
 let tempUserColorValueB = 0;
 let startTwice = false;
+let adjustValue = -10;
 
 let isUserColorValid = false;
 let isUserNumBlocksValid = false;
@@ -90,70 +91,82 @@ function addElement() {
 }
 
 function assignColorValue(position) {
-    //make for loop to go through and create all of the colors
-    const mainDiv = document.getElementById("main");
-    color_0 = "white"
-    color_1 = tempUserColorValue;
-    color_2 = adjustColorValues(-10);
-    color_3 = adjustColorValues(-30);
-    color_4 = adjustColorValues(-50);
-    color_5 = adjustColorValues(-70);
-
-    if (numOfColors == 1) {
-        if (position == 0) {
-            colorValue = color_1;
-        } else {
-            colorValue = color_0;
-        }
-    } else if (numOfColors == 2) {
-        if (position == 0) {
-            colorValue = color_1;
-        } else if ((position == 1) || (position == numOfBlocks - 1)) {
-            colorValue = color_2;
-        } else {
-            colorValue = color_0;
-        }
-    } else if (numOfColors == 3) {
-        if (position == 0) {
-            colorValue = color_1;
-        } else if ((position == 1) || (position == numOfBlocks - 1)) {
-            colorValue = color_2;
-        } else if ((position == 2) || (position == numOfBlocks - 2)) {
-            colorValue = color_3;
-        } else {
-            colorValue = color_0;
-        }
-    } else if (numOfColors == 4) {
-        if (position == 0) {
-            colorValue = color_1;
-        } else if ((position == 1) || (position == numOfBlocks - 1)) {
-            colorValue = color_2;
-        } else if ((position == 2) || (position == numOfBlocks - 2)) {
-            colorValue = color_3;
-        } else if ((position == 3) || (position == numOfBlocks - 3)) {
-            colorValue = color_4;
-        } else {
-            colorValue = color_0;
-        }
-    }  else if (numOfColors == 5) {
-        if (position == 0) {
-            colorValue = color_1;
-        } else if ((position == 1) || (position == numOfBlocks - 1)) {
-            colorValue = color_2;
-        } else if ((position == 2) || (position == numOfBlocks - 2)) {
-            colorValue = color_3;
-        } else if ((position == 3) || (position == numOfBlocks - 3)) {
-            colorValue = color_4;
-        } else if ((position == 4) || (position == numOfBlocks - 4)) {
-            colorValue = color_5;
-        } else {
-            colorValue = color_0;
-        }
+    if (position < numOfColors) {
+        colorValue = adjustColorValues(position * adjustValue);
+        
+        return colorValue;
+    } else if  ((numOfBlocks - position) < numOfColors) {
+        adjustValue = -10;
+        colorValue = adjustColorValues((numOfBlocks - position) * adjustValue);
+        
+        return colorValue;
     } else {
-        //not valid input
+        colorValue = "white";
+        return colorValue;
     }
+
+    // color_0 = "white"
+    // color_1 = tempUserColorValue;
+    // color_2 = adjustColorValues(-10);
+    // color_3 = adjustColorValues(-30);
+    // color_4 = adjustColorValues(-50);
+    // color_5 = adjustColorValues(-70);
+
+    // if (numOfColors == 1) {
+    //     if (position == 0) {
+    //         colorValue = color_1;
+    //     } else {
+    //         colorValue = color_0;
+    //     }
+    // } else if (numOfColors == 2) {
+    //     if (position == 0) {
+    //         colorValue = color_1;
+    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
+    //         colorValue = color_2;
+    //     } else {
+    //         colorValue = color_0;
+    //     }
+    // } else if (numOfColors == 3) {
+    //     if (position == 0) {
+    //         colorValue = color_1;
+    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
+    //         colorValue = color_2;
+    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
+    //         colorValue = color_3;
+    //     } else {
+    //         colorValue = color_0;
+    //     }
+    // } else if (numOfColors == 4) {
+    //     if (position == 0) {
+    //         colorValue = color_1;
+    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
+    //         colorValue = color_2;
+    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
+    //         colorValue = color_3;
+    //     } else if ((position == 3) || (position == numOfBlocks - 3)) {
+    //         colorValue = color_4;
+    //     } else {
+    //         colorValue = color_0;
+    //     }
+    // }  else if (numOfColors == 5) {
+    //     if (position == 0) {
+    //         colorValue = color_1;
+    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
+    //         colorValue = color_2;
+    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
+    //         colorValue = color_3;
+    //     } else if ((position == 3) || (position == numOfBlocks - 3)) {
+    //         colorValue = color_4;
+    //     } else if ((position == 4) || (position == numOfBlocks - 4)) {
+    //         colorValue = color_5;
+    //     } else {
+    //         colorValue = color_0;
+    //     }
+    // } else {
+    //     //not valid input
+    // }
  
-    return colorValue;
+    // return colorValue;
 }
 
 function blockAnimation() {
@@ -227,11 +240,9 @@ function startInterval() {
         //calculate the animation time
         animationTime = (animationTime / numOfBlocks) * 1000;
 
-        console.log("intervalId value before start: " + intervalId)
         startPressed = true;
         intervalId = setInterval(blockAnimation, animationTime);
-        console.log("Animation started\nintervalId: " + intervalId);  
-        console.log("Start button pressed: " + startPressed);  
+        console.log("Start button pressed");  
     } else if (startPressed == true) {
         console.log("Start button was pressed twice and animation was reset");
         startTwice = true;
@@ -243,7 +254,6 @@ function startInterval() {
 function resetInterval() {
     clearInterval(intervalId);
     console.log("Animation Complete");
-    console.log(`Start Twice: ${startTwice}`);
 
     //removes all of the div's created from the first addElement
     if (animationArray.length > 0) {
@@ -274,6 +284,7 @@ function resetInterval() {
     tempUserColorValue = "";
     animationTime = 0;
     iterationCount = 0;
+    adjustValue = -10;
 
     //set input borders back to normal
     document.getElementById("red-value").style.borderColor = "";
@@ -302,9 +313,7 @@ function resetInterval() {
     } else {
         startTwice = false;
     }
- 
-    console.log("Animation reset\nintervalId: " + intervalId);
-}
+ }
 
 //combine these into one play/pause button like music player
 function pauseInterval() {
@@ -312,13 +321,13 @@ function pauseInterval() {
         //set text in button to say resume
         intervalId = setInterval(blockAnimation, animationTime);
         document.getElementById("pause-button").innerHTML = "Pause";
-        console.log("Animation resumed\nintervalId:" + intervalId);
+        console.log("Animation resumed");
     } else if (startPressed == true) {
         //set text in button to say pause
         clearInterval(intervalId);
         intervalId = null;
         document.getElementById("pause-button").innerHTML = "Resume";
-        console.log("Animation paused\nintervalId: " + intervalId);
+        console.log("Animation paused");
     }
 
 }
