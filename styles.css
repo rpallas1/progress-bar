@@ -54,7 +54,7 @@ h1 {
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     h1 {
-        font-size: 40px;
+        font-size: 58px;
     }
 
   .instructions ul {
@@ -143,7 +143,7 @@ form p {
 }
 
 .radio-button input:checked ~ .checkmark {
-    background-color: blue;
+    background-color: rgb(56, 136, 248);
 }
 
 /* the last three integer inputs */
@@ -319,14 +319,20 @@ input[type=number]:focus {
     }
 
     #start-button, #pause-button, #reset-button {
-        padding: 18px;
+        padding: 8px;
         margin: 30px auto;
         width: 60vw;
         height: 3.5vh;
+        transition-duration: 0;
     }
 
     #start-button {
-        border: 2px solid #4CAF50
+        border: 2px solid #4CAF50;
+    }
+
+    #start-button:active {
+        background-color: #4CAF50;
+        color: white;
     }
 
     #pause-button {
@@ -334,7 +340,16 @@ input[type=number]:focus {
         border: 2px solid #ccc;
     }
 
+    #pause-button:active {
+        background-color: #ccc;
+    }
+
     #reset-button {
         border: 2px solid #f44336;
+    }
+
+    #reset-button:active {
+        background-color: #f44336;
+        color: white;
     }
 }
