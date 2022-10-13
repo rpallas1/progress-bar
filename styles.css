@@ -4,6 +4,8 @@
 
   --anim-transition: linear;
   --anim-direction: none;
+
+  --screen-width: 480px;
 }
 
 html, body {
@@ -51,8 +53,16 @@ h1 {
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    h1 {
+        font-size: 40px;
+    }
+
   .instructions ul {
-    width: 82vw;
+    width: 90vw;
+  }
+
+  .instructions li {
+    font-size: 1.4em;
   }
 }
 
@@ -75,7 +85,7 @@ form p {
   width: 80%;
 }
 
-#color-input label {
+#color-input-title {
   margin: 0 5px;
   font-size: 14px;
 }
@@ -88,12 +98,47 @@ form p {
   padding: 2px;
 }
 
-.num-colors-input {
-  display: block;
+.num-colors-input p {
+  margin: 8px 0;
+  text-align: center;
 }
 
-.num-colors-input > p {
-  margin: 8px 0;
+.radio-button {
+    display: block;
+}
+
+.radio-button {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    margin-right: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radio-button input {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.radio-button input:checked ~ .checkmark {
+    background-color: blue;
 }
 
 /* the last three integer inputs */
@@ -118,98 +163,173 @@ input[type=number]:focus {
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
-  #color-input {
-    flex-direction: column;
-  }
+    form p {
+        font-size: 28px;
+        text-align: center;
+    }
 
-  input[type=number] {
-    width: 75vw;
-  }
+    .color-input-title {
+        font-size: 25px;;
+        margin-top: 20px;
+    }
+
+    #color-input :first-child {
+        margin-top: 0;
+    } 
+
+    form label {
+        font-size: 28px;
+    }
+
+    form input[type=number] {
+        border: 2px solid #222;
+        font-size: 25px;
+    }
+
+    ::placeholder {
+        font-size: 25px;
+    }
+
+    #color-input {
+        flex-direction: column;
+    }
+
+    .num-colors-input p {
+        margin: 28px 0;
+    }
+
+    .radio-button {
+        padding-left: 35px;
+        margin-bottom: 12px;
+        margin-right: 40px;
+        font-size: 28px;
+    }
+
+    .checkmark {
+        width: 32px;
+        height: 32px;
+    }
+
+    .int-input-title {
+        margin-top: 20px;
+    }
+
+    input[type=number] {
+        width: 50vw;
+        height: 2.5vh;
+    }
 }
 
 /* --- ANIMATION --- */
 .animation {
-  flex-direction: column;
-  order: 2;
+    flex-direction: column;
+    order: 2;
 }
 
 #separate {
-  width: 100%;
-  height: 1px;
-  border-top: 2px dashed #222;
+    width: 100%;
+    height: 1px;
+    border-top: 2px dashed #222;
 }
 
 #main {
-  display: flex;
-  width: var(--total-width);
-  height: var(--total-height);
-  border: 1px solid black;
-  margin: 20px auto 20px auto;
-  padding: 1px;
-  border-radius: 10px;
+    display: flex;
+    width: var(--total-width);
+    height: var(--total-height);
+    border: 1px solid black;
+    margin: 20px auto 20px auto;
+    padding: 1px;
+    border-radius: 10px;
 }
 
 #main div {
-  flex: 1 auto;
-  background: var(--color1);
-  display: inline-block;
-  border: 1px solid white;
-  border-radius: 10px;
+    flex: 1 auto;
+    background: var(--color1);
+    display: inline-block;
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
   #main {
     width: 90vw;
+    height: 5vh;
   }
 }
 
 /* BUTTONS */
 .button {
-  display: block;
-  margin: 10px auto;
-  background-color: #ddd;
-  color: #222;
-  border-radius: 4px;
-  border: none;
-  text-align: center;
+    display: block;
+    margin: 10px auto;
+    background-color: #ddd;
+    color: #222;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
 }
 
 #reset-button {
-  color: #222;
-  width: 40vw;
-  background-color: white;
-  border: 1px solid #f44336;
-  padding: 8px;
-  transition-duration: 0.4s;
+    color: #222;
+    width: 40vw;
+    background-color: white;
+    border: 1px solid #f44336;
+    padding: 8px;
+    transition-duration: 0.4s;
 }
 
 #start-button {
-  color: #222;
-  width: 40vw;
-  background-color: white;
-  border: 1px solid #4CAF50 ;
-  padding: 8px;
-  transition-duration: 0.4s;
+    color: #222;
+    width: 40vw;
+    background-color: white;
+    border: 1px solid #4CAF50 ;
+    padding: 8px;
+    transition-duration: 0.4s;
 }
 
 #pause-button {
-  color: #222;
-  width: 25vw;
-  background-color: white;
-  border: 1px solid #ccc;
-  transition-duration: 0.2s;
+    color: #222;
+    width: 25vw;
+    background-color: white;
+    border: 1px solid #ccc;
+    transition-duration: 0.2s;
 }
 
 #reset-button:hover {
-  background-color: #f44336;
-  color: white;
+    background-color: #f44336;
+    color: white;
 }
 
 #start-button:hover {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 #pause-button:hover {
-  background-color: #ccc;
+    background-color: #ccc;
 }  
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    .button {
+        font-size: 32px;
+    }
+
+    #start-button, #pause-button, #reset-button {
+        padding: 18px;
+        margin: 30px auto;
+        width: 60vw;
+        height: 3.5vh;
+    }
+
+    #start-button {
+        border: 2px solid #4CAF50
+    }
+
+    #pause-button {
+        width: 55vw;
+        border: 2px solid #ccc;
+    }
+
+    #reset-button {
+        border: 2px solid #f44336;
+    }
+}
