@@ -2,7 +2,6 @@
     --total-width: 75%;
     --total-height: 50px;
 
-    --anim-transition: linear;
     --anim-direction: none;
 }
 
@@ -21,33 +20,15 @@ body {
 
 
 /* --- INSTRUCTIONS --- */
-.instructions h1 {
+h1 {
     flex-wrap: wrap;
     align-content: center;
     flex-direction: column;
-}
-
-h1 {
     background-color: #e8e8e8;
     width: 100%;
     text-align: center;
     margin: 0 auto;
     padding: 5px 0;
-}
-
-.instructions ul {
-    background-color: #ccc;
-    width: 65%;
-    text-align: center;
-    margin: 15px auto 5px auto;
-    list-style: none;
-    padding: 0;
-    border-radius: 8px;
-}
-
-.instructions li{
-    text-align: center;
-    padding: 5px;
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
@@ -81,6 +62,7 @@ form p {
     display: flex;
     align-items: center;
     width: 80%;
+    margin-bottom: 28px;
 }
 
 #color-input label {
@@ -91,57 +73,6 @@ form p {
 #color-input-title {
     margin: 0 5px;
     font-size: 14px;
-}
-
-#number-of-colors-input {
-    border-radius: 5px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: white;
-    padding: 2px;
-}
-
-.num-colors-input p {
-    margin: 8px 0;
-    text-align: center;
-}
-
-.radio-button {
-    display: block;
-}
-
-.radio-button {
-    display: inline-block;
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    margin-right: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.radio-button input {
-    position: absolute;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
-    border-radius: 50%;
-}
-
-.radio-button input:checked ~ .checkmark {
-    background-color: rgb(56, 136, 248);
 }
 
 /* the last three integer inputs */
@@ -291,9 +222,10 @@ input[type=number]:focus {
 
 #pause-button {
     color: #222;
-    width: 25vw;
+    width: 30vw;
     background-color: white;
     border: 1px solid #ccc;
+    padding: 6px;
     transition-duration: 0.2s;
 }
 

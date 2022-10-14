@@ -91,6 +91,10 @@ function addElement() {
 }
 
 function assignColorValue(position) {
+    if ((numOfColors * 2) - 1 > numOfBlocks) {
+        numOfColors = (numOfBlocks / 2) + 1;
+    }
+
     if (position < numOfColors) {
         colorValue = adjustColorValues(position * adjustValue);
         
@@ -104,69 +108,6 @@ function assignColorValue(position) {
         colorValue = "white";
         return colorValue;
     }
-
-    // color_0 = "white"
-    // color_1 = tempUserColorValue;
-    // color_2 = adjustColorValues(-10);
-    // color_3 = adjustColorValues(-30);
-    // color_4 = adjustColorValues(-50);
-    // color_5 = adjustColorValues(-70);
-
-    // if (numOfColors == 1) {
-    //     if (position == 0) {
-    //         colorValue = color_1;
-    //     } else {
-    //         colorValue = color_0;
-    //     }
-    // } else if (numOfColors == 2) {
-    //     if (position == 0) {
-    //         colorValue = color_1;
-    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
-    //         colorValue = color_2;
-    //     } else {
-    //         colorValue = color_0;
-    //     }
-    // } else if (numOfColors == 3) {
-    //     if (position == 0) {
-    //         colorValue = color_1;
-    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
-    //         colorValue = color_2;
-    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
-    //         colorValue = color_3;
-    //     } else {
-    //         colorValue = color_0;
-    //     }
-    // } else if (numOfColors == 4) {
-    //     if (position == 0) {
-    //         colorValue = color_1;
-    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
-    //         colorValue = color_2;
-    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
-    //         colorValue = color_3;
-    //     } else if ((position == 3) || (position == numOfBlocks - 3)) {
-    //         colorValue = color_4;
-    //     } else {
-    //         colorValue = color_0;
-    //     }
-    // }  else if (numOfColors == 5) {
-    //     if (position == 0) {
-    //         colorValue = color_1;
-    //     } else if ((position == 1) || (position == numOfBlocks - 1)) {
-    //         colorValue = color_2;
-    //     } else if ((position == 2) || (position == numOfBlocks - 2)) {
-    //         colorValue = color_3;
-    //     } else if ((position == 3) || (position == numOfBlocks - 3)) {
-    //         colorValue = color_4;
-    //     } else if ((position == 4) || (position == numOfBlocks - 4)) {
-    //         colorValue = color_5;
-    //     } else {
-    //         colorValue = color_0;
-    //     }
-    // } else {
-    //     //not valid input
-    // }
- 
-    // return colorValue;
 }
 
 function blockAnimation() {
@@ -178,7 +119,7 @@ function blockAnimation() {
 
         if (intervalCount > iterationCount) {
             //---- BUG ----
-            //Still need to stop animation ofter the resetColors() runs 
+            //Still need to stop animation ofter the resetColors() runs
             resetColors();
             console.log("Still running, press reset or pause to stop\nintervalId: " + intervalId);
         } 
@@ -191,7 +132,7 @@ function blockAnimation() {
 
 function resetColors() {
     for (let block in animationArray) {
-        animationArray[block]["block" + block].color = color_1;
+        animationArray[block]["block" + block].color = tempUserColorValue;
     }
     setBlockColor();
 }
@@ -299,7 +240,8 @@ function resetInterval() {
     document.getElementById("animation-time").style.borderWidth = "";
     document.getElementById("iteration-count").style.borderColor = "";
     document.getElementById("iteration-count").style.borderWidth = "";
-    document.getElementById("number-of-colors-input").style.borderColor = "";
+    document.getElementById("num-colors").style.borderColor = "";
+    document.getElementById("num-colors").style.borderWidth = "";
     document.getElementById("pause-button").innerHTML = "Pause";
 
     if (startTwice == false) {
@@ -310,12 +252,12 @@ function resetInterval() {
     numOfBlocks = document.getElementById("num-blocks").value = "";
     animationTime = document.getElementById("animation-time").value = "";
     iterationCount = document.getElementById("iteration-count").value = "";
+    numOfColors = document.getElementById("num-colors").value = "";
     } else {
         startTwice = false;
     }
  }
 
-//combine these into one play/pause button like music player
 function pauseInterval() {
     if(!intervalId && startPressed == true) {
         //set text in button to say resume
@@ -334,8 +276,7 @@ function pauseInterval() {
 
 function adjustColorValues(valueChange) {
     parseInt(valueChange);
-    //make sure it doesn't go lower than 0 or greater than 255
-    //don't change the dominant RGB, only the two that have smaller values
+
     userColorValueR -= valueChange;
     if (userColorValueR < 0) {
         userColorValueR = 0;
@@ -376,13 +317,7 @@ function getUserInput() {
     numOfBlocks = document.getElementById("num-blocks").value;
     animationTime = document.getElementById("animation-time").value;
     iterationCount = document.getElementById("iteration-count").value;
-    
-    try {
-        numOfColors = document.querySelector('input[name="num-colors"]:checked').value;
-    }
-    catch (err) {
-        numOfColors = -1;
-    }
+    numOfColors = document.getElementById("num-colors").value;
 
     if (userColorValueR == "") {
         document.getElementById("red-value").style.borderColor = "red";
@@ -456,14 +391,15 @@ function getUserInput() {
         inputEntered = true
     }
 
-    if (numOfColors == -1) {
-        document.getElementById("number-of-colors-input").style.borderColor = "red";
+    if (numOfColors == "") {
+        document.getElementById("num-colors").style.borderColor = "red";
+        document.getElementById("num-colors").style.borderWidth = "2px";
 
         //default input
-        numOfColors = document.getElementById("number-of-colors-input").value = 3;
-        inputEntered = true;
+        numOfColors = 4;
     } else {
-        document.getElementById("number-of-colors-input").style.borderColor = "";
-        inputEntered = true;
+        document.getElementById("num-colors").style.borderColor = "";
+        document.getElementById("num-colors").style.borderWidth = "";
+        inputEntered = true
     }
 }
