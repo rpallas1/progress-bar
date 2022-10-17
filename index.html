@@ -12,15 +12,10 @@
             <h1>Animation</h1>
         </section>
         <form class="user-input" id="input">
-            <p>Enter RGB color value:</p>
             <div id="color-input">
-                <label class="color-input-title" for="red-value">Red:</label>
-                <input type="number" id="red-value" name="red-value" min="0" max="255" placeholder="0-255">
-                <label class="color-input-title" for="green-value">Green:</label>
-                <input type="number" id="green-value" name="green-value" min="0" max="255" placeholder="0-255">
-                <label class="color-input-title" for="blue-value">Blue:</label>
-                <input type="number" id="blue-value" name="blue-value" min="0" max="255" placeholder="0-255">
-            </div>
+                <label for="color-value">Choose a color:</label>
+                <input type="color" id="color-value" name="color-value">
+            </div><br>
             <div class="int-input" id="number-of-colors-input">
                 <label class="int-input-title" for="num-colors">Enter the number of colors:</label>
                 <input type="number" name="num-colors" id="num-colors" min="1" max="10" required>

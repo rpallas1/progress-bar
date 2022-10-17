@@ -228,12 +228,6 @@ function resetInterval() {
     adjustValue = -10;
 
     //set input borders back to normal
-    document.getElementById("red-value").style.borderColor = "";
-    document.getElementById("red-value").style.borderWidth = "";
-    document.getElementById("green-value").style.borderColor = "";
-    document.getElementById("green-value").style.borderWidth = "";
-    document.getElementById("blue-value").style.borderColor = "";
-    document.getElementById("blue-value").style.borderWidth = "";
     document.getElementById("num-blocks").style.borderColor = "";
     document.getElementById("num-blocks").style.borderWidth = "";
     document.getElementById("animation-time").style.borderColor = "";
@@ -245,10 +239,6 @@ function resetInterval() {
     document.getElementById("pause-button").innerHTML = "Pause";
 
     if (startTwice == false) {
-    //clears the previous user input (radio button not included??)
-    userColorValueR = document.getElementById("red-value").value = "";
-    userColorValueG = document.getElementById("green-value").value = "";
-    userColorValueB = document.getElementById("blue-value").value = "";
     numOfBlocks = document.getElementById("num-blocks").value = "";
     animationTime = document.getElementById("animation-time").value = "";
     iterationCount = document.getElementById("iteration-count").value = "";
@@ -275,6 +265,7 @@ function pauseInterval() {
 }
 
 function adjustColorValues(valueChange) {
+    //change to adjust hex color
     parseInt(valueChange);
 
     userColorValueR -= valueChange;
@@ -310,57 +301,25 @@ function adjustColorValues(valueChange) {
 
 // ---- USER INPUT ----
 function getUserInput() {
-    //change the num of colors to a normal input up to 10 
-    userColorValueR = document.getElementById("red-value").value;
-    userColorValueG = document.getElementById("green-value").value;
-    userColorValueB = document.getElementById("blue-value").value;
     numOfBlocks = document.getElementById("num-blocks").value;
     animationTime = document.getElementById("animation-time").value;
     iterationCount = document.getElementById("iteration-count").value;
     numOfColors = document.getElementById("num-colors").value;
+    colorValue = document.getElementById("color-value").value;
 
-    if (userColorValueR == "") {
-        document.getElementById("red-value").style.borderColor = "red";
-        document.getElementById("red-value").style.borderWidth = "2px";
-
-        //default input
-        userColorValueR = 123;
-    } else {
-        document.getElementById("red-value").style.borderColor = "";
-        document.getElementById("red-value").style.borderWidth = ""; 
-        inputEntered = true;   
-    }
-
-    if (userColorValueG == "") {
-        document.getElementById("green-value").style.borderColor = "red";
-        document.getElementById("green-value").style.borderWidth = "2px";
-
-        //default input
-        userColorValueG = 123;
-    } else {
-        document.getElementById("green-value").style.borderColor = "";
-        document.getElementById("green-value").style.borderWidth = "";
-        inputEntered = true;
-    }
-
-    if (userColorValueB == "") {
-        document.getElementById("blue-value").style.borderColor = "red";
-        document.getElementById("blue-value").style.borderWidth = "2px";
-
-        //default input
-        userColorValueB = 123;
-    } else {
-        document.getElementById("blue-value").style.borderColor = "";
-        document.getElementById("blue-value").style.borderWidth = "";
-        inputEntered = true;
-    }
+    //converts the Hex color to RGB
+    colorValue = colorValue.slice(1, 8);
+    colorValue = colorValue.match(/.{1,2}/g);
+    userColorValueR = parseInt(colorValue[0], 16);
+    userColorValueG = parseInt(colorValue[1], 16);
+    userColorValueB = parseInt(colorValue[2], 16);
 
     if (numOfBlocks == "") {
         document.getElementById("num-blocks").style.borderColor = "red";
         document.getElementById("num-blocks").style.borderWidth = "2px";
 
         //default input
-        numOfBlocks = 10;
+        numOfBlocks = 15;
     } else {
         document.getElementById("num-blocks").style.borderColor = "";
         document.getElementById("num-blocks").style.borderWidth = "";

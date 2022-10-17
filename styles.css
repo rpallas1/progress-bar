@@ -60,19 +60,18 @@ form p {
 
 #color-input {
     display: flex;
-    align-items: center;
-    width: 80%;
-    margin-bottom: 28px;
+    flex-direction: column;
+    margin-top: 12px;
 }
 
-#color-input label {
-    margin-right: 4px;
-    margin-left: 12px;
+input[type=color] {
+    display: block;
+    width: 15vw;
+    margin: 8px auto 0 auto;
 }
 
-#color-input-title {
-    margin: 0 5px;
-    font-size: 14px;
+input[type=color]:hover {
+    cursor: pointer;
 }
 
 /* the last three integer inputs */
@@ -200,11 +199,12 @@ input[type=number]:focus {
     border-radius: 4px;
     border: none;
     text-align: center;
+    font-size: 18px;
 }
 
 #reset-button {
     color: #222;
-    width: 40vw;
+    width: 30vw;
     background-color: white;
     border: 1px solid #f44336;
     padding: 8px;
@@ -213,7 +213,7 @@ input[type=number]:focus {
 
 #start-button {
     color: #222;
-    width: 40vw;
+    width: 30vw;
     background-color: white;
     border: 1px solid #4CAF50 ;
     padding: 8px;
