@@ -1,6 +1,5 @@
 window.onload = init;
 
-// let numOfBlocks = 17;
 let className = "block-";
 let idName = 0;
 let classNum = 0;
@@ -118,8 +117,8 @@ function blockAnimation() {
         iterationCount *= numOfBlocks;
 
         if (intervalCount > iterationCount) {
-            //---- BUG ----
-            //Still need to stop animation ofter the resetColors() runs
+            //!---- BUG ----
+            //!Still need to stop animation ofter the resetColors() runs
             resetColors();
             console.log("Still running, press reset or pause to stop\nintervalId: " + intervalId);
         } 
@@ -239,10 +238,10 @@ function resetInterval() {
     document.getElementById("pause-button").innerHTML = "Pause";
 
     if (startTwice == false) {
-    numOfBlocks = document.getElementById("num-blocks").value = "";
-    animationTime = document.getElementById("animation-time").value = "";
-    iterationCount = document.getElementById("iteration-count").value = "";
-    numOfColors = document.getElementById("num-colors").value = "";
+        numOfBlocks = document.getElementById("num-blocks").value = "";
+        animationTime = document.getElementById("animation-time").value = "";
+        iterationCount = document.getElementById("iteration-count").value = "";
+        numOfColors = document.getElementById("num-colors").value = "";
     } else {
         startTwice = false;
     }
