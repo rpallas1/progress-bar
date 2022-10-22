@@ -226,6 +226,8 @@ function resetInterval() {
     iterationCount = 0;
     adjustValue = -10;
 
+    const mainDiv = document.getElementById("main");
+
     //set input borders back to normal
     document.getElementById("num-blocks").style.borderColor = "";
     document.getElementById("num-blocks").style.borderWidth = "";
@@ -236,6 +238,8 @@ function resetInterval() {
     document.getElementById("num-colors").style.borderColor = "";
     document.getElementById("num-colors").style.borderWidth = "";
     document.getElementById("pause-button").innerHTML = "Pause";
+    document.getElementById("main").style.width = getComputedStyle(mainDiv).getPropertyValue("--total-width");
+    document.getElementById("main").style.height = getComputedStyle(mainDiv).getPropertyValue("--total-height");
 
     if (startTwice == false) {
         numOfBlocks = document.getElementById("num-blocks").value = "";

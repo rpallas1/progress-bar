@@ -169,10 +169,13 @@ input[type=number]:focus {
     display: flex;
     width: var(--total-width);
     height: var(--total-height);
+    min-width: 20%;
     border: 1px solid black;
     margin: 20px auto 20px auto;
     padding: 1px;
     border-radius: 10px;
+    overflow: auto;
+    resize: both;
 }
 
 #main div {
@@ -242,6 +245,11 @@ input[type=number]:focus {
 #pause-button:hover {
     background-color: #ccc;
 }  
+
+.v2-button {
+    margin: 0 auto;
+    margin-top: 25px;
+}
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     .button {
