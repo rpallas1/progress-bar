@@ -32,23 +32,35 @@ let tempUserColorValueG = 0;
 let tempUserColorValueB = 0;
 let startTwice = false;
 let adjustValue = -10;
+let tempAnimationTime = 1;
 
 let isUserColorValid = false;
 let isUserNumBlocksValid = false;
 
-//get CSS colors
-let color_0 = "";
-let color_1 = "";
-let color_2 = "";
-let color_3 = "";
-let color_4 = "";
-let color_5 = "";
-
 function init() {
-    //Event Listeners
+    //Event Listeners for start, pause, and reset buttons (both versions)
     document.getElementById("start-button").addEventListener("click", startInterval);
     document.getElementById("reset-button").addEventListener("click", resetInterval);
     document.getElementById("pause-button").addEventListener("click", pauseInterval);
+
+    //Event Listeners for increment buttons (version 2.0)
+    document.getElementById("num-blocks-increase").addEventListener("click", numBlocksIncrease);
+    document.getElementById("num-blocks-decrease").addEventListener("click", numBlocksDecrease);
+
+    document.getElementById("num-colors-increase").addEventListener("click", numColorsIncrease);
+    document.getElementById("num-colors-decrease").addEventListener("click", numColorsDecrease);
+
+    document.getElementById("animation-time-increase").addEventListener("click", animTimeIncrease);
+    document.getElementById("animation-time-decrease").addEventListener("click", animTimeDecrease);
+
+    document.getElementById("iteration-count-increase").addEventListener("click", iterationCountIncrease);
+    document.getElementById("iteration-count-decrease").addEventListener("click", iterationCountDecrease);
+
+    document.getElementById("animation-direction").addEventListener("click", animationDirectionButton);
+
+    document.getElementById("reset-size").addEventListener("click", resetSize);
+
+    getUserInput("num-blocks", "animation-time", "iteration-count", "num-colors", "color-value");
 }
 
 function addElement() {
@@ -104,7 +116,9 @@ function assignColorValue(position) {
         
         return colorValue;
     } else {
-        colorValue = "white";
+        const mainDiv = document.getElementById("main");
+        colorValue = getComputedStyle(mainDiv).getPropertyValue("--div-background-color").trim();
+
         return colorValue;
     }
 }
@@ -119,6 +133,7 @@ function blockAnimation() {
         if (intervalCount > iterationCount) {
             //!---- BUG ----
             //!Still need to stop animation ofter the resetColors() runs
+            //one fix is to throw an error, stops the program
             resetColors();
             console.log("Still running, press reset or pause to stop\nintervalId: " + intervalId);
         } 
@@ -144,10 +159,6 @@ function setBlockColor() {
 }
 
 function shiftColors() {
-    //get animation direction from CSS
-    const mainDiv = document.getElementById("main");
-    animationDirection = getComputedStyle(mainDiv).getPropertyValue("--anim-direction").trim();
-
     //---- OBJECT ORIENTED ----
     //gets the color value from each block and stores it an array
     for (let block in animationArray) {
@@ -173,7 +184,7 @@ function shiftColors() {
 
 function startInterval() {
     if ((!intervalId) && (startPressed == false)) {
-        getUserInput();
+        getUserInput("num-blocks", "animation-time", "iteration-count", "num-colors", "color-value");
         addElement();
         setBlockColor();
 
@@ -207,7 +218,6 @@ function resetInterval() {
     animationArray = [];
     animationArrayTempColorShift = [];
     tempColorValue = "";
-    animationTime = 0;
     intervalCount = 0;
     idName = 0;
     classNum = 0;
@@ -219,16 +229,12 @@ function resetInterval() {
     userColorValueR = 0;
     userColorValueG = 0;
     userColorValueB = 0;
-    numOfBlocks = 0;
-    numOfColors = 0;
     tempUserColorValue = "";
-    animationTime = 0;
-    iterationCount = 0;
     adjustValue = -10;
 
-    const mainDiv = document.getElementById("main");
-
-    //set input borders back to normal
+    // resetSize();
+    //set input borders back to normal 
+    // //TODO: make function for reset borders (if even needed)
     document.getElementById("num-blocks").style.borderColor = "";
     document.getElementById("num-blocks").style.borderWidth = "";
     document.getElementById("animation-time").style.borderColor = "";
@@ -238,14 +244,16 @@ function resetInterval() {
     document.getElementById("num-colors").style.borderColor = "";
     document.getElementById("num-colors").style.borderWidth = "";
     document.getElementById("pause-button").innerHTML = "Pause";
-    document.getElementById("main").style.width = getComputedStyle(mainDiv).getPropertyValue("--total-width");
-    document.getElementById("main").style.height = getComputedStyle(mainDiv).getPropertyValue("--total-height");
 
     if (startTwice == false) {
-        numOfBlocks = document.getElementById("num-blocks").value = "";
-        animationTime = document.getElementById("animation-time").value = "";
-        iterationCount = document.getElementById("iteration-count").value = "";
-        numOfColors = document.getElementById("num-colors").value = "";
+        numOfBlocks = document.getElementById("num-blocks").value = 20;
+        animationTime = document.getElementById("animation-time").value = 1;
+        iterationCount = document.getElementById("iteration-count").value = 10;
+        numOfColors = document.getElementById("num-colors").value = 8;
+        document.getElementById("color-value").value = "#0000ff";
+        document.getElementById("animation-direction").innerHTML = "Direction: Normal";
+        tempAnimationTime = 1;
+        resetSize();
     } else {
         startTwice = false;
     }
@@ -264,7 +272,6 @@ function pauseInterval() {
         document.getElementById("pause-button").innerHTML = "Resume";
         console.log("Animation paused");
     }
-
 }
 
 function adjustColorValues(valueChange) {
@@ -303,12 +310,12 @@ function adjustColorValues(valueChange) {
 }
 
 // ---- USER INPUT ----
-function getUserInput() {
-    numOfBlocks = document.getElementById("num-blocks").value;
-    animationTime = document.getElementById("animation-time").value;
-    iterationCount = document.getElementById("iteration-count").value;
-    numOfColors = document.getElementById("num-colors").value;
-    colorValue = document.getElementById("color-value").value;
+function getUserInput(numBlocksID, animTimeID, iterationCountID, numColorsID, colorValueID) {
+    numOfBlocks = document.getElementById(numBlocksID).value;
+    animationTime = document.getElementById(animTimeID).value;
+    iterationCount = document.getElementById(iterationCountID).value;
+    numOfColors = document.getElementById(numColorsID).value;
+    colorValue = document.getElementById(colorValueID).value;
 
     //converts the Hex color to RGB
     colorValue = colorValue.slice(1, 8);
@@ -318,14 +325,14 @@ function getUserInput() {
     userColorValueB = parseInt(colorValue[2], 16);
 
     if (numOfBlocks == "") {
-        document.getElementById("num-blocks").style.borderColor = "red";
-        document.getElementById("num-blocks").style.borderWidth = "2px";
+        document.getElementById(numBlocksID).style.borderColor = "red";
+        document.getElementById(numBlocksID).style.borderWidth = "2px";
 
         //default input
-        numOfBlocks = 15;
+        numOfBlocks = 20;
     } else {
-        document.getElementById("num-blocks").style.borderColor = "";
-        document.getElementById("num-blocks").style.borderWidth = "";
+        document.getElementById(numBlocksID).style.borderColor = "";
+        document.getElementById(numBlocksID).style.borderWidth = "";
         inputEntered = true
     }
     
@@ -358,7 +365,7 @@ function getUserInput() {
         document.getElementById("num-colors").style.borderWidth = "2px";
 
         //default input
-        numOfColors = 4;
+        numOfColors = 8;
     } else {
         document.getElementById("num-colors").style.borderColor = "";
         document.getElementById("num-colors").style.borderWidth = "";

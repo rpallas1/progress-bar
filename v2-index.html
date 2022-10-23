@@ -16,33 +16,36 @@
         </div>
         <button id="reset-size">Reset Size</button>
         <div class="controls">
-            <div class="num-blocks">
-                <label for="num-blocks-input">Number of blocks</label>
-                <input type="number" id="num-blocks-input" name="num-blocks-input" min="8" value="20" required>
+            <div class="num-blocks-input">
+                <label for="num-blocks">Number of blocks</label>
+                <input type="number" id="num-blocks" name="num-blocks" min="8" value="20" required>
                 <button class="increase" id="num-blocks-increase">+</button>
                 <button class="decrease" id="num-blocks-decrease">-</button>
             </div>
-            <div class="color-value">
-                <label for="color-value-input">Color</label>
-                <input type="color" id="color-value-input" name="color-value-input" value="#0000ff" required>
+            <div class="color-value-input">
+                <label for="color-value">Color</label>
+                <input type="color" id="color-value" name="color-value" value="#0000ff" required>
             </div>
-            <div class="num-colors">
-                <label for="num-colors-input">Number of colors</label>
-                <input type="number" id="num-colors-input" name="num-colors-input" min="1" value="8" required>
+            <div class="num-colors-input">
+                <label for="num-colors">Number of colors</label>
+                <input type="number" id="num-colors" name="num-colors" min="1" value="8" required>
                 <button class="increase" id="num-colors-increase">+</button>
                 <button class="decrease" id="num-colors-decrease">-</button>
             </div>
-            <div class="animation-time">
-                <label for="animation-time-input">Animation time</label>
-                <input type="number" name="animation-time-input" id="animation-time-input" min="0.1" step="0.1" value="1" required>
+            <div class="animation-time-input">
+                <label for="animation-time">Animation time</label>
+                <input type="number" name="animation-time" id="animation-time" min="0.1" step="0.1" value="1" required>
                 <button class="increase" id="animation-time-increase">+</button>
                 <button class="decrease" id="animation-time-decrease">-</button>
             </div>
-            <div class="iteration-count">
-                <label for="iteration-count-input">Iteration count</label>
-                <input type="number" name="iteration-count-input" id="iteration-count-input" min="1" value="10" required>
+            <div class="iteration-count-input">
+                <label for="iteration-count">Iteration count</label>
+                <input type="number" name="iteration-count" id="iteration-count" min="1" value="10" required>
                 <button class="increase" id="iteration-count-increase">+</button>
                 <button class="decrease" id="iteration-count-decrease">-</button>
+            </div>
+            <div class="animatio-direction-input">
+                <button id="animation-direction">Direction: Normal</button>
             </div>
         </div>
         <div class="animation-buttons">

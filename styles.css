@@ -2,7 +2,7 @@
     --total-width: 75%;
     --total-height: 50px;
     
-    --anim-direction: none;
+    --div-background-color: white;
 }
 
 html, body {
@@ -180,7 +180,7 @@ input[type=number]:focus {
 
 #main div {
     flex: 1 auto;
-    background: var(--color1);
+    background: var(--div-background-color);
     display: inline-block;
     border: 1px solid white;
     border-radius: 10px;
